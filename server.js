@@ -33,6 +33,10 @@ socket.on('chatMessage', (msg) => {
     console.log('Message received:', msg);
 });
 
+const cors = require('cors');
+app.use(cors());
+
+
 // Start the server
 const PORT = 3000;
 server.listen(PORT, () => {
