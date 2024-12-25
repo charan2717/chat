@@ -13,17 +13,24 @@ app.use(express.static('public'));
 
 // Handle connection events
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    console.log('User connected: ', socket.id);
 
-    // Broadcast a message to all clients
     socket.on('chatMessage', (msg) => {
+        console.log('Message received: ', msg);
         io.emit('chatMessage', msg);
     });
 
-    // Handle user disconnect
     socket.on('disconnect', () => {
-        console.log('A user disconnected');
+        console.log('User disconnected: ', socket.id);
     });
+});
+
+socket.on('connect', () => {
+    console.log('Connected to server with ID:', socket.id);
+});
+
+socket.on('chatMessage', (msg) => {
+    console.log('Message received:', msg);
 });
 
 // Start the server
